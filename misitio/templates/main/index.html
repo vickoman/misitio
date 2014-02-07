@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Vickoman App - Home{% endblock title %}
+{% block body %}
+	<h2>Candidatos a la alcaldia</h2>
+	<div style="border:1px solid #ccc;">
+		{% if  candidatos %}
+			{% for candidato in candidatos %}
+				<article>
+					<img src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}" />
+					<caption>
+						<h4>{{ candidato.nombre}} <br> {{ candidato.apellido }}</h4>
+						<p>
+							{% if user.is_authenticated %}
+								{% if mivoto %}
+								{% for voto in mivoto  %}							
+									{% if voto.candidato.nombre == candidato.nombre %}
+										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion" disabled="disabled">Esta fue tu elección</button>	
+										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer">Deshacer</button>
+									{% else %}
+										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion" disabled="disabled">Votar</button>	
+										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+									{% endif %}
+								{% endfor %}							
+								{% else %}
+								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion">Votar</button>	
+								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+								{% endif %}
+							{% else %}
+								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnSession">Votar</button>	
+							{% endif %}
+						</p> 
+					</caption>
+				</article>
+			{% endfor %}
+		{% else %}
+			<p>No hay candidatos registrados</p>
+		{% endif %}				
+	</div>
+	<div style="border:1px solid #ccc;"> 		
+		{% include 'main/top-candidatos.html'%}
+	</div>
+	<hr>
+	<div>{{firma}}</div>
+{% endblock body %}
+{% block script %}
+	<script>
+		$(function(){
+			var csrftoken = getCookie('csrftoken');
+			$.ajaxSetup({
+				dataType: "json",
+			    beforeSend: function(xhr, settings) {
+			        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+			            // Send the token to same-origin, relative URLs only.
+			            // Send the token only if the method warrants CSRF protection
+			            // Using the CSRFToken value acquired earlier
+			            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			        }
+			    }
+			});
+
+			$('.btnVotacion').click(function(e){				
+				var id_candidato = $(this).attr('id');								
+				$.ajax({
+					url: "{% url 'url_votar_ajax' %}",
+					data: {
+						id_candidato: id_candidato
+					},
+					type: "POST"
+				})
+				.done(function( msg ) {
+					if ( msg.mensaje == "Ya" )
+					{
+						alert("Ya votaste, Solo es valido un voto por cada usuario! si quieres cambiar tu votacion tienes que deshacer la anterior!");
+					}else if(msg.mensaje == "NO" ){
+						alert("Error al crear la votacion no se pudo votar! intentalo luego")
+					}else if( msg.mensaje == "OK" ){
+						var elemento = $('#' + id_candidato);						
+					    elemento.attr('disabled', true);				    
+					    elemento.text("Esta fue tu elección");	
+					    btnDeshacer = elemento.siblings('button.btnDeshacer');
+					    btnDeshacer.fadeIn()
+					    btnDeshacer.attr('disabled', false);
+					}
+					
+
+				 });
+
+			});	
+
+			$('.btnDeshacer').click(function(){
+				var id_candidato = $(this).attr('id');								
+				$.ajax({
+					url: "{% url 'url_deshacer_voto' %}",
+					data: {
+						id_candidato: id_candidato
+					},
+					type: "POST"
+				})
+				.done(function( response ){
+					console.log(response.mensaje)
+					if (response.mensaje == "OK" ){
+						$('button.btnDeshacer').fadeOut();
+						var elemento = $('#' + id_candidato);						
+						elemento.attr('disabled', false);
+						elemento.text('Votar');
+						$('.btnVotacion').attr('disabled', false);
+					}
+					else if( response.mensaje == "NO")
+					{
+						alert('Error al deshacer la votacion intentalo luego!')
+					}
+				});
+			});	
+
+			$('.btnSession').click(function(){
+				alert('Necesitas logearte')
+			});
+		});
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		function sameOrigin(url) {
+		    // test that a given url is a same-origin URL
+		    // url could be relative or scheme relative or absolute
+		    var host = document.location.host; // host + port
+		    var protocol = document.location.protocol;
+		    var sr_origin = '//' + host;
+		    var origin = protocol + sr_origin;
+		    // Allow absolute or scheme relative URLs to same origin
+		    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+		        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+		        // or any other URL that isn't scheme relative or absolute i.e relative.
+		        !(/^(\/\/|http:|https:).*/.test(url));
+		}
+	</script>
+{% endblock script %}

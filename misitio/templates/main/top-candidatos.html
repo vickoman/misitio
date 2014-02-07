@@ -1,0 +1,10 @@
+<h3>Top de Votaciones</h3>
+{% if topcandidatos %}
+<ul>
+	{% for candidato in topcandidatos  %}
+		<li>{{ candidato.nombre }} {{ candidato.apellido }} {{ candidato.num_votos}} Votos</li>
+	{% endfor %}
+</ul>
+{% else %}
+	<p>No hay candidatos Votados</p>
+{% endif %}
