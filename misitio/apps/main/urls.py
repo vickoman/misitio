@@ -4,6 +4,7 @@ urlpatterns = patterns('misitio.apps.main.views',
 		url(r'^$', 'index_view', name="url_home"),
 		url(r'^ajax/votar/$', 'VotarAjaxView', name="url_votar_ajax"),
 		url(r'^ajax/voto/deshacer', 'DeshacerVoto', name="url_deshacer_voto"),
+		url(r'^resultados', 'resultados_view', name="url_resultados")
 		url(r'^logout', 'logout', name="url_logout"),
 
 	)

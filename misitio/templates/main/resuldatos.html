@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Resultado de las votacionas para la Alcaldia de Guayaquil 104{% endblock title %}
+{% block body %}
+<h2>Resuldatos de las votaciones</h2>
+<div style="border:1px solid #ccc;">
+	<!-- Candidato uno -->
+	 {% if candidatos %}
+	 	{% for candidato in candidatos  %}
+			{{candidato.nombre}} {{candidato.apellido}}
+			<p>{{ candidato.num_votos}}</p>
+			<br>	 		
+	 	{% endfor %}
+	 {% else %}
+	 	<p>No existen candidatos con estadisticas!</p>
+	 {% endif %}
+	</--candidato 2 -->
+</div>
+{% endblock %}
