@@ -15,6 +15,12 @@ def index_view(request):
 	ctx = {"candidatos" : candidatos, "mivoto" : mivoto}
 	return render_to_response(template,ctx, context_instance=RequestContext(request))
 
+def resultados_view(request):
+	candidatos = Candidato.objects.annotate(num_votos=Count('votos_candidatos')).order_by('-num_votos')
+	template = "main/resuldatos.html"
+	ctx = { "candidatos" : candidatos }
+	return render_to_response(template, ctx, context_instance=RequestContext(request))
+
 def VotarAjaxView(request):	
 	if request.is_ajax():
 		#votos = Votos.objects.filter(candidato = request.POST['id_candidato'])		
