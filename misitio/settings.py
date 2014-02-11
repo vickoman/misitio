@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'izxbymnjv8^yi!m-e6gpg!%oqqa*-f8y%pr7v6yz+7o12c94^_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
@@ -58,12 +58,18 @@ WSGI_APPLICATION = 'misitio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'OPTIONS': {
+#           'read_default_file' :  os.path.join(BASE_DIR, 'my.cnf'),
+#        },
+#    }
+#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-           'read_default_file' :  os.path.join(BASE_DIR, 'my.cnf'),
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
