@@ -16,8 +16,8 @@ def index_view(request):
 	return render_to_response(template,ctx, context_instance=RequestContext(request))
 
 def resultados_view(request):
-	candidatos = candidatos.objects.annotate(num_votos=Count('votos_candidatos')).order_by('-num_votos')
-	template = "main/resultados.html"
+	candidatos = Candidato.objects.annotate(num_votos=Count('votos_candidatos')).order_by('-num_votos')
+	template = "main/resuldatos.html"
 	ctx = { "candidatos" : candidatos }
 	return render_to_response(template, ctx, context_instance=RequestContext(request))
 
