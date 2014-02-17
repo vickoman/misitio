@@ -1,0 +1,151 @@
+azul = #2e88cc
+cyan = #2eb0cc
+gris_fondo = #efefef
+gris_borde = #c6c6c6
+botones = #818181
+plomo = #3c3c3c
+
+body
+	background gris_fondo
+	font-family Georgia
+	font-size 16pt
+
+header
+	background url("../images/estrella.png") center no-repeat 
+	background-color azul
+	border-bottom 7px solid cyan
+	height 109px
+	box-shadow 0px 2px 0px gris_borde
+
+	.estrella
+		display block
+		margin 0px auto
+		padding-top 40px
+
+.hideButton
+	display none
+	
+.main
+	text-align center
+	position relative
+
+	h1
+		color azul
+		font-size 1.2em
+		font-style italic
+
+	.fotos
+		background white
+		border-bottom 1px solid gris_borde
+		overflow hidden
+		padding 20px 30px 60px 30px
+
+		.candidato
+			border-top 8px solid gris_borde
+			border-radius 3px
+			box-shadow 0px 2px 5px gris_borde
+			float left
+			width 50%
+
+			button
+				background botones
+				border-radius 3px
+				border 0px
+				color white
+				font-weight 700
+				padding 20px 0px
+				text-transform uppercase
+				width 100%
+
+			h2
+				color plomo
+				font-size 1.1em
+				font-style italic
+
+	.gracias
+		background lightgreen
+		color green
+		font-weight 700
+		left 0
+		line-height 0
+		margin-left 0px
+		margin-right 0px
+		padding 20px 0px
+		position absolute
+		right 0
+		top 10px
+
+.top-votaciones
+	text-align center
+
+	h2
+		color plomo
+		font-size 1em
+		font-style italic
+
+	.cont-resul
+		background plomo
+		border-bottom 4px solid gris_borde
+		border-top 4px solid gris_borde
+		overflow hidden
+		padding 30px 0px 
+
+		.resul
+			float left
+			width 50%
+
+			h3
+				color white
+				font-style italic
+				font-size 0.9em
+
+			.cantidad
+				color white
+				font-family "Gill Sans MT"
+				font-size 3em
+				line-height 0
+				margin-top 30px
+
+			.votos
+				color white
+				font-family "Gill Sans MT"
+				font-size 0.8em
+				line-height 0
+				margin-top -20px
+
+footer
+	color gris_borde
+	text-align center
+
+@media screen and (min-width: 320px)
+	.main
+		.fotos
+			padding 10px 2px
+			.candidato
+				margin 0px 8px
+				width 45%
+
+		.gracias
+			line-height 1.2em
+
+@media screen and (min-width: 1024px)
+	
+	.main
+		.fotos
+			border-radius 3px
+			margin 0px auto
+			width 920px
+			.candidato
+				margin 0px 10px
+				width 210px
+		.gracias
+			border-radius 3px
+			line-height 1em
+			margin 0px auto
+			top 10px
+			width 40%
+
+	.top-votaciones
+		border-radius 3px
+		margin 0px auto
+		width 700px
