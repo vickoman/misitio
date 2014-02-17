@@ -2,47 +2,51 @@
 {% load staticfiles %}
 {% block title %}Votacion por la alcaldia de Guayaquil 2014{% endblock title %}
 {% block body %}
-	<h2>Candidatos a la alcaldia</h2>
-	<div style="border:1px solid #ccc;">
-		{% if  candidatos %}
-			{% for candidato in candidatos %}
-				<article>
-					<img src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}" />
-					<caption>
-						<h4>{{ candidato.nombre}} <br> {{ candidato.apellido }}</h4>
-						<p>
-							{% if user.is_authenticated %}
-								{% if mivoto %}
-								{% for voto in mivoto  %}							
-									{% if voto.candidato.nombre == candidato.nombre %}
-										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion" disabled="disabled">Esta fue tu elección</button>	
-										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer">Deshacer</button>
-									{% else %}
-										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion" disabled="disabled">Votar</button>	
-										<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
-									{% endif %}
-								{% endfor %}							
-								{% else %}
-								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnVotacion">Votar</button>	
-								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
-								{% endif %}
+	
+	<section class="main">
+		
+		<article>
+			<h1>Votaciones por la alcaldía de Guayaquil</h1>
+			
+			<div class="fotos">
+			{% if  candidatos %}	
+				{% for candidato in candidatos %}				
+				<div class="candidato">
+					<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
+					<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>					
+					{% if user.is_authenticated %}
+						{% if mivoto %}
+						{% for voto in mivoto  %}							
+							{% if voto.candidato.nombre == candidato.nombre %}
+								<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion" disabled="disabled">Esta fue tu elección</button>	
+								<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer">Deshacer</button>
 							{% else %}
-								<button type="button" id="{{ candidato.pk }}" class="btn btn-default btn-xs btnSession">Votar</button>	
+								<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion" disabled="disabled">Votar</button>	
+								<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
 							{% endif %}
-						</p> 
-					</caption>
-				</article>
-			{% endfor %}
-		{% else %}
-			<p>No hay candidatos registrados</p>
-		{% endif %}				
-	</div>
-	<div style="border:1px solid #ccc;"> 		
-		{% include 'main/top-candidatos.html'%}
-	</div>
-	<hr>
-	<div>{{firma}}</div>
+						{% endfor %}							
+						{% else %}
+						<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion">Votar</button>	
+						<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+						{% endif %}
+					{% else %}
+						<button type="button" id="{{ candidato.pk }}" class="votar btnSession">Votar</button>	
+					{% endif %}
+				</div>				
+				{# <p class="gracias">Gracias por tu voto, revisa los resultados más abajo.</p> #}
+				{% endfor %}
+			</div>
+			{% else %}
+				<p>No hay candidatos registrados</p>
+			{% endif %}	
+		</article>
+		
+	</section>
+	
 {% endblock body %}
+{% block footer %}
+	<p>Desarrollado por: Víctor Díaz | Diseñado por: Eduardo Kang</p>
+{% endblock footer %}
 {% block script %}
 	<script>
 		$(function(){

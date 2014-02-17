@@ -4,25 +4,32 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>{% block title %}Vickoman App{% endblock title %}</title>
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}" />
-	<link rel="stylesheet" href="{% static 'css/app.css'%}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximim-scale=1">
+	<title>{% block title %}Alcalde Guayaquil 2014{% endblock title %}</title>	
 </head>
 <body>
-	<header>
+	
 		{% if user.is_authenticated %}
 			hola {{ user.username }}	<a href='{% url "url_logout" %}'>Salir</a>
 		{% else %}
 			<a href="login/facebook">Login with Facebook</a>
 		{% endif %}
-		| <a href="{% url 'url_resultados' %}">Resultados</a>		
+	<header>
 	</header>
 {% block body %}
 	
 {% endblock body %}
 
+
+<footer>
+{% block footer %}
+			
+{% endblock footer %}		
+</footer>	
+
+<link rel="stylesheet" href="{% static 'css/elecciones.css'%}" />
+<link rel="stylesheet" href="{% static 'css/normalize.css'%}" />
 <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% block script %}
 	
 {% endblock script %}
