@@ -22,7 +22,7 @@ header .estrella{display:block;margin:0 auto;padding-top:40px}
 footer{color:#c6c6c6;text-align:center}
 @media screen and (min-width: 320px){.main .fotos{padding:10px 2px;}
 .main .fotos .candidato{margin:0 8px;width:45%;}
-.main .fotos .candidato img{width:177px;height:210px}
+.main .fotos .candidato img{width:170px;height:210px}
 .main .gracias{line-height:1.2em}
 }@media screen and (min-width: 1024px){.main .fotos{border-radius:3px;margin:0 auto;width:920px;}
 .main .fotos .candidato{margin:0 10px;width:210px;}
