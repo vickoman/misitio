@@ -3,6 +3,7 @@ cyan = #2eb0cc
 gris_fondo = #efefef
 gris_borde = #c6c6c6
 botones = #818181
+botones_selected = azul
 plomo = #3c3c3c
 
 body
@@ -61,6 +62,17 @@ header
 				color plomo
 				font-size 1.1em
 				font-style italic
+
+			img 
+				width 210px
+				height 225px
+
+		.candidato.selected
+			border-top 8px solid azul
+
+			button 
+				background botones_selected
+
 
 	.gracias
 		background lightgreen
@@ -125,6 +137,10 @@ footer
 				margin 0px 8px
 				width 45%
 
+				img
+					width 177px
+					height 210px
+
 		.gracias
 			line-height 1.2em
 
@@ -138,6 +154,10 @@ footer
 			.candidato
 				margin 0px 10px
 				width 210px
+
+				img 
+					width 210px
+					height 225px
 		.gracias
 			border-radius 3px
 			line-height 1em

@@ -10,29 +10,42 @@
 			
 			<div class="fotos">
 			{% if  candidatos %}	
-				{% for candidato in candidatos %}				
-				<div class="candidato">
-					<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
-					<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>					
+				{% for candidato in candidatos %}								
 					{% if user.is_authenticated %}
 						{% if mivoto %}
 						{% for voto in mivoto  %}							
-							{% if voto.candidato.nombre == candidato.nombre %}
-								<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion" disabled="disabled">Esta fue tu elección</button>	
-								<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer">Deshacer</button>
+							{% if voto.candidato.nombre == candidato.nombre %}								
+								<div class="candidato selected" >
+									<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
+									<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>
+									<button type="button" id="{{ candidato.pk }}" class="votar hideButton btnVotacion" disabled="disabled">Votar</button>						
+									<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer">Deshacer</button>
+								</div>				
 							{% else %}
-								<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion" disabled="disabled">Votar</button>	
-								<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+								<div class="candidato" >
+									<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
+									<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>					
+									<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion" disabled="disabled">Votar</button>	
+									<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+								</div>				
 							{% endif %}
 						{% endfor %}							
 						{% else %}
-						<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion">Votar</button>	
-						<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+						<div class="candidato" >
+									<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
+									<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>					
+							<button type="button" id="{{ candidato.pk }}" class="votar btnVotacion">Votar</button>	
+							<button type="button" id="{{ candidato.pk }}" class="votar btnDeshacer hideButton" disabled="disbaled">Deshacer</button>
+						</div>
 						{% endif %}
 					{% else %}
+					<div class="candidato" >
+									<img class="fotocandidato" src="{{ candidato.foto.url }}" alt="{{ candidato.nombre }}{{ candidato.apellido }}" width="100%" />
+									<h2>{{ candidato.nombre }} <br> {{ candidato.apellido }}</h2>		
 						<button type="button" id="{{ candidato.pk }}" class="votar btnSession">Votar</button>	
+					</div>
 					{% endif %}
-				</div>				
+				
 				{# <p class="gracias">Gracias por tu voto, revisa los resultados más abajo.</p> #}
 				{% endfor %}
 			</div>
@@ -81,10 +94,15 @@
 					}else if( msg.mensaje == "OK" ){
 						var elemento = $('#' + id_candidato);						
 					    elemento.attr('disabled', true);				    
-					    elemento.text("Esta fue tu elección");	
+					    //elemento.text("Esta fue tu elección");	
+					    elemento.hide();
 					    btnDeshacer = elemento.siblings('button.btnDeshacer');
 					    btnDeshacer.fadeIn()
 					    btnDeshacer.attr('disabled', false);
+					    btnDeshacer.css({
+					    	background: '#2e88cc'
+					    });
+					    btnDeshacer.parent().addClass('selected');
 					}
 					
 
@@ -104,11 +122,15 @@
 				.done(function( response ){
 					console.log(response.mensaje)
 					if (response.mensaje == "OK" ){
-						$('button.btnDeshacer').fadeOut();
+						$('button.btnDeshacer').hide();
 						var elemento = $('#' + id_candidato);						
-						elemento.attr('disabled', false);
-						elemento.text('Votar');
+						elemento.fadeIn();
+						elemento.attr('disabled', false);						
 						$('.btnVotacion').attr('disabled', false);
+						elemento.css({
+							background: '#818181'
+						});
+						elemento.parent().removeClass('selected');
 					}
 					else if( response.mensaje == "NO")
 					{
