@@ -1,13 +1,17 @@
 body{background:#efefef;font-family:Georgia;font-size:16pt}
-header{background:url("../images/estrella.png") no-repeat;background-position:50% 25%;background-color:#2e88cc;border-bottom:7px solid #2eb0cc;height:109px;box-shadow:0 2px 0 #c6c6c6;position:relative;}
+header{background:url("../images/estrella.png") no-repeat;background-position:50% 38%;background-color:#2e88cc;border-bottom:7px solid #2eb0cc;height:109px;box-shadow:0 2px 0 #c6c6c6;position:relative;}
 header .estrella{display:block;margin:0 auto;padding-top:40px}
 .hideButton{display:none}
-.userInfo{position:absolute;bottom:15px;left:0;right:0;text-align:center;}
-.userInfo span.user{text-transform:uppercase;color:#fff;}
-.userInfo span.user a{text-transform:uppercase;color:#fff}
-.userInfo span.user a.logout{background-color:#0b61a4;padding:10px 15px}
-.userInfo a{text-transform:uppercase}
-.userInfo a.facebook{color:#fff;background-color:#0b61a4;text-decoration:none;padding:10px 15px;text-transform:uppercase}
+.resultado{float:left;width:45%;border:1px solid #ccc;margin-right:15px;margin-bottom:15px;}
+.resultado img{width:30%;height:90px;float:left}
+.resultado .right{float:right;width:70%;}
+.resultado .right .titulo{border-bottom:1px solid #ccc}
+.userInfoTop{position:absolute;top:10px;left:0;right:0;text-align:center;}
+.userInfoTop span.user{text-transform:uppercase;color:#fff;}
+.userInfoTop span.user a{text-transform:uppercase;color:#fff;background-color:#0b61a4;text-decoration:none;padding:10px 15px;text-transform:uppercase}
+.userInfoTop span.user a.logout{background-color:#0b61a4;padding:7px}
+.userInfo{position:absolute;bottom:15px;left:0;right:0;text-align:center;color:#fff;}
+.userInfo a{text-transform:uppercase;color:#fff;background-color:#0b61a4;text-decoration:none;padding:10px 15px;text-transform:uppercase}
 .userInfo a.logout{color:#fff;text-decoration}
 .main{text-align:center;position:relative;}
 .main h1{color:#2e88cc;font-size:1.2em;font-style:italic}
@@ -27,7 +31,8 @@ header .estrella{display:block;margin:0 auto;padding-top:40px}
 .top-votaciones .cont-resul .resul .cantidad{color:#fff;font-family:"Gill Sans MT";font-size:3em;line-height:0;margin-top:30px}
 .top-votaciones .cont-resul .resul .votos{color:#fff;font-family:"Gill Sans MT";font-size:.8em;line-height:0;margin-top:-20px}
 footer{color:#c6c6c6;text-align:center}
-@media screen and (min-width: 320px){.main .fotos{padding:10px 2px;}
+@media screen and (min-width: 320px){.resultado{width:100%}
+.main .fotos{padding:10px 2px;}
 .main .fotos .candidato{margin:0 8px;width:45%;}
 .main .fotos .candidato img{width:170px;height:210px}
 .main .gracias{line-height:1.2em}

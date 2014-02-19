@@ -13,7 +13,7 @@ body
 
 header
 	background url("../images/estrella.png") no-repeat 
-	background-position 50% 25%
+	background-position 50% 38%
 	background-color azul
 	border-bottom 7px solid cyan
 	height 109px
@@ -28,9 +28,28 @@ header
 .hideButton
 	display none
 
-.userInfo
+.resultado
+	float left
+	width 45%
+	border 1px solid #ccc
+	margin-right 15px
+	margin-bottom 15px
+
+	img
+		width 30%
+		height 90px
+		float left
+
+	.right
+		float right
+		width 70%
+
+		.titulo
+			border-bottom 1px solid #ccc
+
+.userInfoTop
 	position absolute
-	bottom 15px
+	top 10px
 	left 0px
 	right 0px
 	text-align center
@@ -41,21 +60,31 @@ header
 
 		a
 			text-transform uppercase
-			color white
-
+			color #fff
+			background-color #0B61A4
+			text-decoration none
+			padding 10px 15px
+			text-transform uppercase
 
 		a.logout
 			background-color #0B61A4
-			padding 10px 15px	
+			padding 7px
+
+.userInfo
+	position absolute
+	bottom 15px
+	left 0px
+	right 0px
+	text-align center
+	color white
+
 	a 
 		text-transform uppercase
-
-	a.facebook
 		color #fff
 		background-color #0B61A4
 		text-decoration none
 		padding 10px 15px
-		text-transform uppercase
+		text-transform uppercase	
 
 	
 	
@@ -168,6 +197,8 @@ footer
 	text-align center
 
 @media screen and (min-width: 320px)
+	.resultado
+		width 100%
 	.main
 		.fotos
 			padding 10px 2px

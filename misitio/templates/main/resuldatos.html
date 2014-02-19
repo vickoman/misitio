@@ -2,37 +2,52 @@
 {% load staticfiles %}
 {% block title %}Resultado de las votacionas para la Alcaldia de Guayaquil 104{% endblock title %}
 {% block body %}
-<h2>Resuldatos de las votaciones</h2>
-<div style="border:1px solid #ccc;">
-	<!-- Candidato uno -->
-	 {% if candidatos %}
-	 	{% for candidato in candidatos  %}
-			{{candidato.nombre}} {{candidato.apellido}}
-			<p>{{ candidato.num_votos}}</p>
-			<br>	 		
-	 	{% endfor %}
-	 {% else %}
-	 	<p>No existen candidatos con estadisticas!</p>
-	 {% endif %}
-	</--candidato 2 -->
-</div>
-<div id="">
-	<div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'votacionesguayaquil'; // required: replace example with your forum shortname
+<section class="main">
+	<article>
+			<h1>Resultados de Votaciones</h1>
+			<div class="fotos">
+				{% if candidatos %}
+					{% for candidato in candidatos %}
+						<div class="resultado">
+							<img src="{{ candidato.foto.url}}" alt="{{ candidato.nombre }} {{ candidato.apellido }}" title="{{ candidato.nombre }} {{ candidato.apellido }}" />
+							<div class="right">
+								<div class="titulo">
+									{{candidato.nombre}} 
+									{{candidato.apellido}}
+								</div>
+							</div>							
+						</div>	
+					{% endfor %}
+					
+				{% else %}
+					<p>No hay candidatos disponibles :(</p>
+				{% endif %}
+			</div>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-</div>
+			<div class="fotos" style="padding: 5px; margin-top:15px;">
+				<div id="">
+					<div id="disqus_thread"></div>
+				    <script type="text/javascript">
+				        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+				        var disqus_shortname = 'votacionesguayaquil'; // required: replace example with your forum shortname
+
+				        /* * * DON'T EDIT BELOW THIS LINE * * */
+				        (function() {
+				            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				        })();
+				    </script>
+				    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+				    
+				</div>
+			</div>
+	</article>
+</section>
+
+
+
 
 
 {% endblock %}

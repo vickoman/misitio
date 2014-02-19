@@ -11,13 +11,18 @@
 	
 		
 	<header>
+		{% if user.is_authenticated %}
+		<div class="userInfoTop">
+			<span class="user">hola, {{ user.username }}  <a href='{% url "url_logout" %}' class="logout">Salir</a></span> 			
+		</div>
 		<div class="userInfo">
-			{% if user.is_authenticated %}
-				<span class="user">hola, {{ user.username }}	<a href='{% url "url_logout" %}' class="logout">Salir</a></span>
-			{% else %}
-				<a href="login/facebook" class="facebook">Entrar con Facebook</a>
-			{% endif %}
+			<a href="{% url 'url_resultados'%}" class="resultados">Resultados</a>	
 		</div>		
+		{% else %}
+		<div class="userInfo">
+			<a href="login/facebook" class="facebook">Entrar con Facebook</a>
+		</div>
+		{% endif %}
 	</header>
 {% block body %}
 	
