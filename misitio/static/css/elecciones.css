@@ -1,7 +1,14 @@
 body{background:#efefef;font-family:Georgia;font-size:16pt}
-header{background:url("../images/estrella.png") center no-repeat;background-color:#2e88cc;border-bottom:7px solid #2eb0cc;height:109px;box-shadow:0 2px 0 #c6c6c6;}
+header{background:url("../images/estrella.png") no-repeat;background-position:50% 25%;background-color:#2e88cc;border-bottom:7px solid #2eb0cc;height:109px;box-shadow:0 2px 0 #c6c6c6;position:relative;}
 header .estrella{display:block;margin:0 auto;padding-top:40px}
 .hideButton{display:none}
+.userInfo{position:absolute;bottom:15px;left:0;right:0;text-align:center;}
+.userInfo span.user{text-transform:uppercase;color:#fff;}
+.userInfo span.user a{text-transform:uppercase;color:#fff}
+.userInfo span.user a.logout{background-color:#0b61a4;padding:10px 15px}
+.userInfo a{text-transform:uppercase}
+.userInfo a.facebook{color:#fff;background-color:#0b61a4;text-decoration:none;padding:10px 15px;text-transform:uppercase}
+.userInfo a.logout{color:#fff;text-decoration}
 .main{text-align:center;position:relative;}
 .main h1{color:#2e88cc;font-size:1.2em;font-style:italic}
 .main .fotos{background:#fff;border-bottom:1px solid #c6c6c6;overflow:hidden;padding:20px 30px 60px 30px;}

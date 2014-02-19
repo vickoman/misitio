@@ -9,12 +9,15 @@
 </head>
 <body>
 	
-		{% if user.is_authenticated %}
-			hola {{ user.username }}	<a href='{% url "url_logout" %}'>Salir</a>
-		{% else %}
-			<a href="login/facebook">Login with Facebook</a>
-		{% endif %}
+		
 	<header>
+		<div class="userInfo">
+			{% if user.is_authenticated %}
+				<span class="user">hola, {{ user.username }}	<a href='{% url "url_logout" %}' class="logout">Salir</a></span>
+			{% else %}
+				<a href="login/facebook" class="facebook">Entrar con Facebook</a>
+			{% endif %}
+		</div>		
 	</header>
 {% block body %}
 	
