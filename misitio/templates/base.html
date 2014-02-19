@@ -11,7 +11,8 @@
 	
 		
 	<header>
-		{% if user.is_authenticated %}
+		{% block header %}
+			{% if user.is_authenticated %}
 		<div class="userInfoTop">
 			<span class="user">hola, {{ user.username }}  <a href='{% url "url_logout" %}' class="logout">Salir</a></span> 			
 		</div>
@@ -23,6 +24,7 @@
 			<a href="login/facebook" class="facebook">Entrar con Facebook</a>
 		</div>
 		{% endif %}
+		{% endblock header %}		
 	</header>
 {% block body %}
 	

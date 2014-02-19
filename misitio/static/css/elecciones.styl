@@ -28,6 +28,11 @@ header
 .hideButton
 	display none
 
+.breadcumb
+	list-style-type none
+
+	li
+		float left
 .resultado
 	float left
 	width 100%
@@ -46,6 +51,18 @@ header
 
 		.titulo
 			border-bottom 1px solid #ccc
+			color plomo
+			font-size 1.1em
+			font-style italic
+		.votos
+			text-align center
+			color #00c12b
+			line-height 50px
+			font-size 2em
+
+			.word
+				color #ccc
+				font-size 0.5em
 
 .userInfoTop
 	position absolute
@@ -197,7 +214,8 @@ footer
 	text-align center
 
 @media screen and (min-width: 320px)
-
+	.resultado
+		width 100%
 	.main
 		.fotos
 			padding 10px 2px
